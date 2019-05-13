@@ -3,3 +3,7 @@ volume/
 # python
 __pycache__/
 .pyc
+
+
+# IDEs
+.vscode/

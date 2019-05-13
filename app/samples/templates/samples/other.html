@@ -4,5 +4,19 @@
 <div class="container">
     <p>{{ test.name }}</p>
     <p>{{ test.description }}</p>
+    <div id="tester"></div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function (event) {
+            const TESTER = document.getElementById('tester');
+            Plotly.plot(TESTER, [{
+                x: {{ plot.x }},
+                y: {{ plot.y }}
+            }],
+                {
+                    margin: { t: 0 }
+                }); s
+        });
+    </script>
 </div>
 {% endblock content %}
