@@ -19,5 +19,16 @@ services:
       - "8000:8000"
     depends_on:
       - db
+  client:
+    build:
+      context: client
+    volumes:
+      - './client:/usr/src/app'
+      - '/usr/src/app/node_modules'
+    ports:
+      - '3000:3000'
+    environment:
+      - NODE_ENV=development
+
 
   
