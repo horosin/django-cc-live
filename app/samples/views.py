@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.urls import reverse_lazy
 from django.http import HttpResponse
 from django.views import generic
 
@@ -20,3 +21,8 @@ def other_page(request):
 
 class SampleListView(generic.ListView):
     model = models.Sample
+
+class SampleCreateView(generic.CreateView):
+   model = models.Sample
+   fields = '__all__'
+   success_url = reverse_lazy('list')
