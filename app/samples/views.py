@@ -1,5 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.views import generic
+
+from . import models
 
 
 # Create your views here.
@@ -8,8 +11,12 @@ def index(request):
 
 
 def other_page(request):
-   context = {
-       'test': 'passing a value to the template'
-   }
-   return render(request, 'samples/other.html', context)
+    first_sample = models.Sample.objects.first()
+    context = {
+        'test': first_sample
+    }
+    return render(request, 'samples/other.html', context)
 
+
+class SampleListView(generic.ListView):
+    model = models.Sample
