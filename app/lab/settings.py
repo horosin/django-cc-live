@@ -48,6 +48,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'lab.middleware.RequireLoginMiddleware',
 ]
 
 ROOT_URLCONF = 'lab.urls'
@@ -55,7 +56,7 @@ ROOT_URLCONF = 'lab.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -124,3 +125,15 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+
+LOGIN_REDIRECT_URL = '/samples/'
+LOGOUT_REDIRECT_URL = '/accounts/login'
+
+LOGIN_REQUIRED_URLS = (
+   r'(.*)',
+)
+LOGIN_REQUIRED_URLS_EXCEPTIONS = (
+   r'/admin(.*)$',
+   r'/accounts(.*)$',
+)

@@ -29,11 +29,24 @@
       <div class="collapse navbar-collapse" id="navbarCollapse">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
-            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            <a class="nav-link" href="{% url 'list' %}">Home <span class="sr-only">(current)</span></a>
           </li>
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a class="nav-link" href="#">Link</a>
+          </li> -->
+          {% if user.is_superuser %}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'admin:index' %}">Admin</a>
           </li>
+          {% endif %} 
+        </ul>
+        <ul class="nav navbar-nav ml-auto" style="color: white;">
+          {% if user.is_authenticated %}
+          <li class="nav-item mr-1">Witaj, {{ user.get_username }} </li>
+          <li class="nav-item"><a href="{% url 'logout'%}?next={{request.path}}">wyloguj</a></li>
+          {% else %}
+          <li class="nav-item"><a href="{% url 'login'%}?next={{request.path}}">zaloguj</a></li>
+          {% endif %}
         </ul>
       </div>
     </nav>
